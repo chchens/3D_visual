@@ -1,0 +1,78 @@
+<!DOCTYPE html >
+
+<html >
+
+    <head>
+    
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <title>3D Scatter</title>
+
+        <link rel="stylesheet" type="text/css" href="css/x3dom.css" />
+        <link rel="stylesheet" type="text/css" href="nav.css" />
+        <script type="text/javascript" src="js/d3.v3.min.js"> </script>
+        <script type="text/javascript" src="js/x3dom.js"> </script>
+
+    </head>
+    
+    <body>
+        <div class="nav">
+            <p><a id="menu_3" href="landscape.html">时序数据展示</a></p>
+			<p><a id="menu_1" href="scatterplot.html">参数分布与组合探索</a></p>
+			<p><a id="menu_2" href="node-link.html">相关性展示</a></p>
+		</div>
+        <div id="plot"></div>
+        <div id="cddh">
+            <p></p>
+            <p></p>
+            <p></p>
+            <label style="font-size: 15px;">功能菜单</label> 
+            <p></p>
+            <p></p>
+            <p></p>
+             <form action="" method="get"> 
+
+                <p></p>
+                <p></p>
+                <label style="font-size: 15px;">该图自变量为一次再热气温、一次再热汽压、总风量、总煤量、总氧量、给水流量</label> 
+                <p></p>
+                <label style="font-size: 15px;">y轴数据为输出功率；</label> 
+                <p></p>
+                <label style="font-size: 15px;">x轴数据为第一主成分；</label> 
+                <p></p>
+                <label style="font-size: 15px;">z轴数据为第二主成分；</label> 
+                <p></p>
+                <p></p>
+                 <p></p>
+                            <label style="font-size: 15px;">参数调节：</label> 
+                 <p></p>
+                <p></p>
+                <label style="font-size: 15px;">输出负荷范围: </label> 
+                <select id="MS"> 
+                    <option value="All">600-1000MW</option> 
+                    <option value="B6">600-700MW</option> 
+                    <option value="B7">700-800MW</option> 
+                    <option value="B8">800-900MW</option> 
+                    <option value="B9">900-1000MW</option> 
+                </select> 
+            </form>
+            
+            <p></p>
+            <p></p>
+            <button id="time" data-count="0" style="width:100px;height:35px">更新</button>
+
+            <button id="clear">清空标记点</button>
+            <p></p>
+            <p></p>
+            <button id="clcolor">显示聚类结果</button>
+            <p></p>
+            <p></p>
+            <input type="button" name="all" value ="显示具体各项参数关系" onclick="window.location.href='scatterplot.html'"/>
+        </div>
+        <div id="wrapper">
+            <script type="text/javascript" src="js/myscatter.js"> </script>
+        </div>
+        
+    </body>
+    
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html >
+
+<html >
+
+    <head>
+    
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <title>3D Scatter</title>
+
+        <link rel="stylesheet" type="text/css" href="css/x3dom.css" />
+        <link rel="stylesheet" type="text/css" href="nav.css" />
+        <script type="text/javascript" src="js/d3.v3.min.js"> </script>
+        <script type="text/javascript" src="js/x3dom.js"> </script>
+
+    </head>
+    
+    <body>
+        <div class="nav">
+            <p><a id="menu_3" href="landscape.html">时序数据展示</a></p>
+			<p><a id="menu_1" href="scatterplot.html">参数分布与组合探索</a></p>
+			<p><a id="menu_2" href="node-link.html">相关性展示</a></p>
+		</div>
+        <div id="plot"></div>
+        <div id="cddh">
+            <p></p>
+            <p></p>
+            <p></p>
+            <label style="font-size: 15px;">参数选择</label> 
+            <p></p>
+            <p></p>
+            <label style="font-size: 15px;">y轴参数为机组功率； </label> 
+            <p></p>
+            <form action="" method="get"> 
+                <label style="font-size: 15px;">x轴参数: </label> 
+                <select id="s1"> 
+                    <option value="FWFLOW">FWFLOW</option> 
+                    <option value="TAF">TAF</option> 
+                    <option value="YRHRPRS">YRHRPRS</option> 
+                    <option value="YRHRTEMPT">YRHRTEMPT</option> 
+                    <option value="O2">O2</option> 
+                    <option value="THRTEMP">THRTEMP</option> 
+                    <option value="MSP">MSP</option>
+                </select> 
+                <p></p>
+                <p></p>
+                <label style="font-size: 15px;">z轴参数: </label> 
+                <select id="s2"> 
+                    <option value="THRTEMP">THRTEMP</option> 
+                    <option value="FWFLOW">FWFLOW</option> 
+                    <option value="TAF">TAF</option> 
+                    <option value="YRHRPRS">YRHRPRS</option> 
+                    <option value="YRHRTEMPT">YRHRTEMPT</option> 
+                    <option value="O2">O2</option> 
+                    <option value="MSP">MSP</option>  
+                    <option value="Angle">Angle</option>  
+                </select> 
+                <p></p>
+                <p></p>
+                <label style="font-size: 15px;">输出负荷范围: </label> 
+                <select id="MS"> 
+                    <option value="All">600-1000MW</option> 
+                    <option value="B6">600-700MW</option> 
+                    <option value="B7">700-800MW</option> 
+                    <option value="B8">800-900MW</option> 
+                    <option value="B9">900-1000MW</option> 
+                </select> 
+            </form>
+            
+            <p></p>
+            <p></p>
+            <button id="time" data-count="0" style="width:100px;height:35px">更新</button>
+
+            <button id="clear">清空标记点</button>
+            <p></p>
+            <p></p>
+            <input type="button" name="all" value ="显示整体关系" onclick="window.location.href='index.html'"/>
+           
+        </div>
+        <div id="wrapper">
+            <script type="text/javascript" src="js/scatterplot.js"> </script>
+        </div>
+        
+    </body>
+    
+</html>

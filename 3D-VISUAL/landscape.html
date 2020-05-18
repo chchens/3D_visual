@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>landscape</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://x3dom.org/download/dev/x3dom-full.js"></script>
+  <link rel="stylesheet" type="text/css" href="nav.css" />
+        <link rel="stylesheet" type="text/css" href="css/d3-x3dom.css" />
+  <script src="../../js/landscape.js"></script>
+</head>
+
+<body>
+    
+  <div class="nav">
+        <p><a id="menu_3" href="landscape.html">时序数据展示</a></p>
+        <p><a id="menu_1" href="scatterplot.html">参数分布与组合探索</a></p>
+        <p><a id="menu_2" href="node-link.html">相关性展示</a></p>
+  </div>
+  <div class="mwa">
+      <p></p>
+      <p></p>
+      <label style="font-size: 25px">机组功率时序展示</label>  
+  </div> 
+  <div id="chartholder" ></div>
+  <script>
+    // Select chartholder
+    var chartHolder = d3.select("#chartholder");
+
+    // Generate some data
+    var myData = d3.x3dom.randomData.dataset4();
+
+    // Declare the chart component
+    var myChart = d3.x3dom.chart.surfacePlot();
+
+    // Attach chart and data to the chartholder
+    chartHolder.datum(myData).call(myChart);
+
+  </script>
+
+</body>
+
+</html>

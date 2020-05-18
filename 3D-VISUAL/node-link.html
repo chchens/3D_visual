@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+.link {
+	stroke: #999;
+	stroke-opacity: .6;
+}
+.cddh{
+    float:left;
+    margin-left:10px;
+    width:20%;
+    height:600px;
+    top:50%;
+}
+    
+
+body{
+    background-color: aliceblue;
+	text-align:center;
+}
+
+</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="nav.css" />
+</head>
+
+
+<body>
+    <div class="nav">
+            <p><a id="menu_3" href="landscape.html">时序数据展示</a></p>
+			<p><a id="menu_1" href="scatterplot.html">参数分布与组合探索</a></p>
+			<p><a id="menu_2" href="node-link.html">相关性展示</a></p>
+		</div>
+    
+        <div class="cddh">
+            <p></p>
+            <p></p>
+            <p></p>
+            <label style="font-size: 15px;">结点对应参数：</label> 
+            <p></p>
+            <p></p>
+            <label style="font-size: 15px;">蓝色：MW、MWD2 </label>               
+            <p></p>
+            <label style="font-size: 15px;">橘黄色：THRTEMP、YRHRTEMPT、RRHRTEMPT </label>               
+            <p></p>
+            <label style="font-size: 15px;">绿色：MSP、MSPS、YRHRPRS、RRHRPRS </label> 
+            <p></p>
+            <label style="font-size: 15px;">红色：FWFLOW、TOTALCOAL、TAF、O2 </label>               
+            <p></p>
+            <label style="font-size: 15px;">棕色：AGP夹角A、AGP夹角B </label>               
+            <p></p>
+            <p></p>            
+            <p></p>
+            <input type="number" id="demo1" step="0.1" min="0.3" max="0.9">
+            <p></p>
+            <p></p>
+            <button onclick="printInputValue()">输入相关性系数阈值</button>
+           
+        </div>
+    
+<div id="container"></div>
+
+
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="js/force3D.js"></script>
+
+<script>
+function printInputValue() {
+        d3.select("svg").remove();
+            var inputValue = document.getElementById("demo1").value;
+            console.log(inputValue);
+            //document.getElementById("demo2").innerHTML = inputValue;
+         //}
+var width = 960,
+height = 500,
+depth = height,
+radius = 12,
+t = 0,
+graph/*,
+min = document.getElementById("minCor").value*/;
+//var min = $("#minCor").val()；
+//var min = document.getElementById("demo1").value;
+//console.log(min);    
+
+
+var color = d3.scale.category10();
+
+var force = d3.layout.force3D()
+	.charge(-120)
+	.linkDistance(200)
+	.size([width, height, depth]);
+
+var svg = d3.select("#container")
+	.append("svg")
+	.attr("width", width)
+	.attr("height", height);
+
+d3.json("http://localhost:8080/e.json", function(error, json) {
+    if(error){
+        alert("Error loading data :( ");
+        console.error(error);
+    }
+    else{
+        graph = json;
+        
+        force
+	        .nodes(graph.nodes)
+	        .links(graph.links)
+	        .start();
+
+        var link = svg.selectAll(".link")
+	        .data(graph.links)
+	        .enter().append("line")
+	        .attr("class", "link")
+	        .style("stroke-width", function(d) 
+                   { if(d.value<inputValue) 
+                        return 0; 
+                    else {
+                        t = d.value*d.value/(0.3*0.3)
+                        console.log(t);
+                        return Math.sqrt(t);
+                    }
+                   });
+
+        var node = svg.selectAll(".node")
+	        .data(graph.nodes)
+	        .enter().append("circle")
+	        .attr("class", "node")
+	        .attr("r", radius)
+	        .style("fill", function(d) { return color(d.group); })
+	        .call(force.drag);
+
+
+        node.append("title")
+	        .text(function(d) { return d.name; });
+
+
+        var distanceScale = d3.scale.linear()
+	        .domain([0,500])
+	        .range([0.1,2]);
+
+
+        force.on("tick", function() {
+	       link.attr("x1", function(d) { return d.source.x; })
+	           .attr("y1", function(d) { return d.source.y; })
+	           .attr("x2", function(d) { return d.target.x; })
+	           .attr("y2", function(d) { return d.target.y; });
+
+	       node.attr("cx", function(d) { return d.x; })
+	           .attr("cy", function(d) { return d.y; })
+	           .attr("r", function(d){  return radius * distanceScale(d.z); });
+
+	       svg.selectAll("circle").sort(function (a, b) {
+		      return (a.z < b.z) ? -1 : 1;
+	       });              
+        });
+    }
+});
+   
+}
+</script>
+</body>
+</html>

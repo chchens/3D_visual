@@ -1,0 +1,33 @@
+{
+	"nodes":[
+		{"name":"YRHRPRS","group":1},
+		{"name":"YRHRTEMPT","group":2},
+		{"name":"RRHRPRS","group":3},
+		{"name":"RRHRTEMPT","group":2},
+		{"name":"THRTEMP","group":2},
+		{"name":"MW","group":1},
+        	{"name":"MWD2","group":1},
+		{"name":"MPS","group":4},
+		{"name":"MSPS","group":4}
+	],
+	"links":[
+		{"source":2,"target":0,"value":1},
+		{"source":3,"target":0,"value":1},
+		{"source":4,"target":0,"value":1},
+		{"source":5,"target":0,"value":5},
+		{"source":6,"target":0,"value":5},
+		{"source":7,"target":0,"value":11},
+		{"source":8,"target":0,"value":7},
+		{"source":2,"target":1,"value":7},
+        	{"source":3,"target":1,"value":6},
+        	{"source":3,"target":2,"value":10},
+        	{"source":7,"target":2,"value":1},
+        	{"source":7,"target":3,"value":1},
+        	{"source":5,"target":4,"value":3},
+        	{"source":6,"target":5,"value":3},
+        	{"source":8,"target":5,"value":3},
+        	{"source":8,"target":6,"value":10},
+        	{"source":8,"target":7,"value":7}
+	]
+}
+
